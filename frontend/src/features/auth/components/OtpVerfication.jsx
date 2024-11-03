@@ -1,7 +1,7 @@
 import {FormHelperText, Paper, Stack, TextField, Typography } from '@mui/material'
 import React, { useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearOtpVerificationError, clearResendOtpError, clearResendOtpSuccessMessage, resendOtpAsync, resetOtpVerificationStatus, resetResendOtpStatus, selectLoggedInUser, selectOtpVerificationError, selectOtpVerificationStatus, selectResendOtpError, selectResendOtpStatus, selectResendOtpSuccessMessage, verifyOtpAsync } from '../AuthSlice'
+import { clearOtpVerificationError, clearResendOtpError, clearResendOtpSuccessMessage, logoutAsync, resendOtpAsync, resetOtpVerificationStatus, resetResendOtpStatus, selectLoggedInUser, selectOtpVerificationError, selectOtpVerificationStatus, selectResendOtpError, selectResendOtpStatus, selectResendOtpSuccessMessage, verifyOtpAsync } from '../AuthSlice'
 import { LoadingButton } from '@mui/lab'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form"
@@ -38,6 +38,10 @@ export const OtpVerfication = () => {
     const handleVerifyOtp=(data)=>{
         const cred={...data,userId:loggedInUser?._id}
         dispatch(verifyOtpAsync(cred))
+    }
+
+    const handleLogout=()=>{
+        dispatch(logoutAsync())
     }
 
     // handles resend otp error
@@ -102,6 +106,7 @@ export const OtpVerfication = () => {
                             </Stack>
                        </Stack>
                         <LoadingButton loading={otpVerificationStatus==='pending'}  type='submit' fullWidth variant='contained'>Verify</LoadingButton>
+                        <LoadingButton onClick={handleLogout} fullWidth variant='outlined'>Logout</LoadingButton>
                     </Stack>
                 ):
                 <>
@@ -110,6 +115,7 @@ export const OtpVerfication = () => {
                     <Typography fontWeight={'600'} color={'GrayText'}>{loggedInUser?.email}</Typography>
                 </Stack>
                 <LoadingButton onClick={handleSendOtp} loading={resendOtpStatus==='pending'} fullWidth variant='contained'>Get OTP</LoadingButton>
+                <LoadingButton onClick={handleLogout}  fullWidth variant='outlined'>Logout</LoadingButton>
                 </>
              }
 

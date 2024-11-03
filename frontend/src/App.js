@@ -7,7 +7,7 @@ import { Logout } from './features/auth/components/Logout';
 import { Protected } from './features/auth/components/Protected';
 import { useAuthCheck } from "./hooks/useAuth/useAuthCheck";
 import { useFetchLoggedInUserDetails } from "./hooks/useAuth/useFetchLoggedInUserDetails";
-import { ForgotPasswordPage, LoginPage, OtpVerificationPage, ResetPasswordPage, SignupPage } from './pages';
+import { ForgotPasswordPage, HomePage, LoginPage, OtpVerificationPage, ResetPasswordPage, SignupPage } from './pages';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 
@@ -24,6 +24,7 @@ function App() {
   const routes = createBrowserRouter(
     createRoutesFromElements(
       <>
+        <Route path='/' element={<HomePage/>}/>
         <Route path='/signup' element={<SignupPage/>}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/verify-otp' element={<OtpVerificationPage/>}/>
