@@ -21,6 +21,11 @@ server.use(express.json())
 server.use(cookieParser())
 server.use(morgan("tiny"))
 
+server.options('*', cors({
+    origin: process.env.ORIGIN,
+    credentials: true,
+  }));
+
 // routeMiddleware
 server.use("/auth",authRoutes)
 server.use("/users",userRoutes)
